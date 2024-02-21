@@ -38,6 +38,7 @@ if __name__ == "__main__":
 
     # Load blue agent
     blue_agent = WrappedBlueAgent
+    #this must be loaded from a specified location
     red_agent = RedAgent()
     # Set up environment with blue agent running in the background and 
     # red agent as the main agent

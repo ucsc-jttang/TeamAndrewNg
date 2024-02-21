@@ -55,6 +55,8 @@ if __name__ == "__main__":
             '''
             CSE233 Project: Here you should call red agent training function 
             '''
+            #training function must save model to a location
+            
             # red_agent.train(...) # CSE233 Project: uncoment when you implement red agent training
             
 
