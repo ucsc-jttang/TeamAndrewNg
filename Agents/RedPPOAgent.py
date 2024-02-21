@@ -15,7 +15,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 #Looks like it is saving a checkpoint of the model into the modles folder. 
 #Saving the trained model for the evaluation.py?
 class RedPPOAgent(BaseAgent):
-    def __init__(self, input_dims=52, action_space=[i for i in range(158)], lr=0.002, betas=[0.9, 0.990], gamma=0.99, K_epochs=4, eps_clip=0.2, restore=False, ckpt=None,
+    def __init__(self, input_dims=52, action_space=[i for i in range(888)], lr=0.002, betas=[0.9, 0.990], gamma=0.99, K_epochs=4, eps_clip=0.2, restore=False, ckpt=None,
                  deterministic=False, training=True, start_actions=[]):
 
         self.lr = lr
@@ -256,14 +256,16 @@ class RedPPOAgent(BaseAgent):
 
         # add decoys to action space (all except user0)
         # self.action_space = action_space + self.decoy_ids
-
+        # Save action space
+        self.action_space = action_space
+        self.n_actions = len(action_space)
         # add 10 to input_dims for the scanning state
         # self.input_dims += 10
 
         #TODO just take in action_space and input_dims
         # self.policy = ActorCritic(self.input_dims, self.n_actions).to(device)
 
-        self.policy = ActorCritic(self.input_dims, action_space).to(device)
+        self.policy = ActorCritic(self.input_dims,self.n_actions ).to(device)
         #If this is load, where is save?
         #Torch.save() is called in train.py
         if self.restore:
@@ -272,7 +274,7 @@ class RedPPOAgent(BaseAgent):
         self.optimizer = torch.optim.Adam(self.policy.parameters(), lr=self.lr, betas=self.betas)
 
         # self.old_policy = ActorCritic(self.input_dims, self.n_actions).to(device)
-        self.old_policy = ActorCritic(self.input_dims, action_space).to(device)
+        self.old_policy = ActorCritic(self.input_dims, self.n_actions).to(device)
         self.old_policy.load_state_dict(self.policy.state_dict())
 
         self.MSE_loss = nn.MSELoss()

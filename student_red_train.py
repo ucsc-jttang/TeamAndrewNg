@@ -76,15 +76,16 @@ if __name__ == "__main__":
     path = str(inspect.getfile(CybORG))
     path = path[:-10] + f'/Shared/Scenarios/{scenario}.yaml'
 
+
     # Load blue agent
     blue_agent = WrappedBlueAgent
-    red_agent = RedPPOAgent()
+    # red_agent = RedPPOAgent()
     # Set up environment with blue agent running in the background and 
     # red agent as the main agent
     cyborg = CybORG(path, 'sim', agents={'Blue': blue_agent})
     env = ChallengeWrapper2(env=cyborg, agent_name="Red")
-    action_space = env.get_action_space('Red')
-
+    action_space_size = env.get_action_space('Red')
+    action_space = [i for i in range(action_space_size)]
 
 
     # set seeds for reproducibility
