@@ -12,6 +12,7 @@ from Wrappers.ChallengeWrapper2 import ChallengeWrapper2
 from Agents.MainAgent import MainAgent
 from Agents.WrappedAgent import WrappedBlueAgent
 from Agents.RedAgent import RedAgent
+from Agents.RedPPOAgent import RedPPOAgent
 import random
 
 MAX_EPS = 100
@@ -35,7 +36,7 @@ if __name__ == "__main__":
 
     # Load blue agent
     blue_agent = WrappedBlueAgent
-    red_agent = RedAgent()
+    red_agent = RedPPOAgent()
     # Set up environment with blue agent running in the background and 
     # red agent as the main agent
     cyborg = CybORG(path, 'sim', agents={'Blue': blue_agent})
@@ -56,7 +57,7 @@ if __name__ == "__main__":
             CSE233 Project: Here you should call red agent training function 
             '''
             #training function must save model to a location
-            
+
             # red_agent.train(...) # CSE233 Project: uncoment when you implement red agent training
             
 
