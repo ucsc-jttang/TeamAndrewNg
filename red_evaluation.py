@@ -13,6 +13,7 @@ from Wrappers.ChallengeWrapper2 import ChallengeWrapper2
 from Agents.WrappedAgent import WrappedBlueAgent
 from Agents.MainAgent import MainAgent
 from Agents.RedAgent import RedAgent
+from Agents.RedPPOAgent import RedPPOAgent
 import random
 
 MAX_EPS = 1
@@ -39,7 +40,9 @@ if __name__ == "__main__":
     # Load blue agent
     blue_agent = WrappedBlueAgent
     #this must be loaded from a specified location
-    red_agent = RedAgent()
+    # red_agent = RedPPOAgent(input_dims=52, action_space=[i for i in range(888)], lr=0.002, betas=[0.9, 0.990], gamma=0.99, K_epochs=4, eps_clip=0.2, restore=True, ckpt='../Models/checkpoints/200.pth',
+    #              deterministic=False, training=True, start_actions=[])
+    red_agent = RedPPOAgent(restore=True, ckpt='/home/ubuntu/233/Models/checkpoints/200.pth')
     # Set up environment with blue agent running in the background and 
     # red agent as the main agent
     cyborg = CybORG(path, 'sim', agents={'Blue': blue_agent})
@@ -65,5 +68,7 @@ if __name__ == "__main__":
             actions.append(a)
             observation = env.reset()
 
+        print(total_reward)
+        print(actions)
 
             
