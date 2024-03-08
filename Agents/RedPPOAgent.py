@@ -82,9 +82,9 @@ class RedPPOAgent(BaseAgent):
 
 
         # force start actions, ignore policy. only for training
-        # if len(self.start_actions) > 0:
-        #     action_ = self.start_actions[0]
-        #     self.start_actions = self.start_actions[1:]
+        if len(self.start_actions) > 0:
+            action_ = self.start_actions[0]
+            self.start_actions = self.start_actions[1:]
 
 
         # if action_ in self.decoy_ids:
@@ -199,7 +199,7 @@ class RedPPOAgent(BaseAgent):
         # remnants of DQNAgent for store_transitions
         self.scan_state_old = np.zeros(10)
         # add start actions
-        # self.start_actions = copy.copy(self.start)
+        self.start_actions = copy.copy(self.start)
 
 
     def set_initial_values(self, action_space, observation=None):

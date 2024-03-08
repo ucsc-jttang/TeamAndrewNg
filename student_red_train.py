@@ -43,8 +43,12 @@ def train(env, input_dims, action_space,
         for t in range(max_timesteps):
             time_step += 1
             action = agent.get_action(state)
-            state, reward, done, _ = env.step(action)
-            agent.store(reward, done)
+            try:
+                state, reward, done, _ = env.step(action)
+                agent.store(reward, done)
+            except:
+
+                agent.store(-100, done)
 
             if time_step % update_timestep == 0:
                 agent.train()
@@ -121,7 +125,7 @@ if __name__ == "__main__":
               update_timestep=update_timesteps, K_epochs=K_epochs,
               eps_clip=eps_clip, gamma=gamma, lr=lr,
               betas=[0.9, 0.990], ckpt_folder=ckpt_folder,
-              print_interval=print_interval, save_interval=save_interval, start_actions=None)
+              print_interval=print_interval, save_interval=save_interval, start_actions=[])
 
             #training function must save model to a location
 
