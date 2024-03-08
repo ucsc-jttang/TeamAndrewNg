@@ -15,7 +15,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 #Looks like it is saving a checkpoint of the model into the modles folder. 
 #Saving the trained model for the evaluation.py?
 class RedPPOAgent(BaseAgent):
-    def __init__(self, input_dims=52, action_space=[i for i in range(888)], lr=0.002, betas=[0.9, 0.990], gamma=0.99, K_epochs=4, eps_clip=0.2, restore=False, ckpt=None,
+    def __init__(self, input_dims=40, action_space=[i for i in range(888)], lr=0.002, betas=[0.9, 0.990], gamma=0.99, K_epochs=6, eps_clip=0.2, restore=False, ckpt=None,
                  deterministic=False, training=True, start_actions=[]):
 
         self.lr = lr
