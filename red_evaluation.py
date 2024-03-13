@@ -42,7 +42,7 @@ if __name__ == "__main__":
     #this must be loaded from a specified location
     # red_agent = RedPPOAgent(input_dims=52, action_space=[i for i in range(888)], lr=0.002, betas=[0.9, 0.990], gamma=0.99, K_epochs=4, eps_clip=0.2, restore=True, ckpt='../Models/checkpoints/200.pth',
     #              deterministic=False, training=True, start_actions=[])
-    red_agent = RedPPOAgent(restore=True, ckpt='/home/ubuntu/233/Models/checkpoints/200.pth')
+    red_agent = RedAgent(restore=True, ckpt='/home/ubuntu/233/Models/checkpoints/62800.pth')
     # Set up environment with blue agent running in the background and 
     # red agent as the main agent
     cyborg = CybORG(path, 'sim', agents={'Blue': blue_agent})
